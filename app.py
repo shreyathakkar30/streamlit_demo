@@ -1,28 +1,29 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
 
-# Title and description
-st.title("🚀 My First Streamlit App")
-st.write("Welcome to my interactive Streamlit app!")
+# Title
+st.title("📦 Delivery Time Prediction App")
 
-# Text Input
-name = st.text_input("Enter your name:", "Shreya")
+# User Inputs
+product_category = st.selectbox("Select Product Category", ["Electronics", "Clothing", "Home Appliances"])
+customer_location = st.selectbox("Select Customer Location", ["Urban", "Suburban", "Rural"])
+shipping_method = st.selectbox("Select Shipping Method", ["Standard", "Express", "Same-day"])
 
-# Button Interaction
-if st.button("Say Hello"):
-    st.write(f"Hello, {name}! 🎉")
+# Prediction Logic (Simple if-else, can be replaced with ML model)
+if st.button("Predict Delivery Time"):
+    if shipping_method == "Same-day":
+        delivery_time = "1 day"
+    elif shipping_method == "Express":
+        delivery_time = "2-3 days"
+    else:
+        if customer_location == "Urban":
+            delivery_time = "4-5 days"
+        elif customer_location == "Suburban":
+            delivery_time = "5-7 days"
+        else:
+            delivery_time = "7-10 days"
 
-# Number Input
-age = st.number_input("Enter your age:", min_value=1, max_value=100, value=21)
+    st.success(f"📦 Expected Delivery Time: **{delivery_time}**")
 
-# Select Box
-favorite_color = st.selectbox("Pick your favorite color:", ["Red", "Blue", "Green", "Yellow"])
-
-# Display Selections
-st.write(f"Your favorite color is {favorite_color} and you are {age} years old!")
-
-# Display a Random Chart
-st.write("📊 Random Data Visualization:")
-chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["A", "B", "C"])
-st.line_chart(chart_data)
+# Footer with Developer Info
+st.markdown("---")
+st.markdown("👩‍💻 **Developed by [Shreya Thakkar](https://github.com/shreya-thakkar)** 💙")
